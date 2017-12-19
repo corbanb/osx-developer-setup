@@ -15,29 +15,29 @@ $ ./setups/osx-nodejs-dev.sh
 ## Roadmap
 
 ### Languages / Platforms
-- [] nodejs
-- [] php
-- [] swift
-- [] golang
-- [] java 
-- [] android
-- [] ruby
-- [] Python
-- [] C++
-- [] C
-- [] scala
-- [] lua
-- [] rust
-- [] makefile
-- [] R
-- [] kotlinlang
+- [ ] nodejs
+- [ ] php
+- [ ] swift
+- [ ] golang
+- [ ] java 
+- [ ] android
+- [ ] ruby
+- [ ] Python
+- [ ] C++
+- [ ] C
+- [ ] scala
+- [ ] lua
+- [ ] rust
+- [ ] makefile
+- [ ] R
+- [ ] kotlinlang
 
 ### IDES
-- [] visualcode
-- [] atom
-- [] brackets
-- [] sublime
-- [] androidstudio
+- [ ] visualcode
+- [ ] atom
+- [ ] brackets
+- [ ] sublime
+- [ ] androidstudio
 
 
 and whatever else you all dream up! :)
