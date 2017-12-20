@@ -1,7 +1,7 @@
 # Developer Setups
 This is currently a repo for storing setups to developer machines. Right now it works well for OSX Node.js developers. Below you will find a roadmap on future updates. I am sure these will require other commiters to assist in perferred setups but will act as a guide to start.
 
-The thought is to allow this script to run as best if can without any other software needing to be installed first. This was why I started with shell as the language. 
+The thought is to allow this script to run as best it can without any other software needing to be installed first. This was why I started with shell as the language. Hope to spend more time with this in 2018. Looking for others to help. Thanks!
 
 
 ## BETA Setup
