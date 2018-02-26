@@ -44,7 +44,7 @@ brew tap homebrew/dupes
 brew install httpd
 brew install php72 --with-httpd
 brew install php72-geoip php72-maxminddb php72-memcached php72-pdo-pgsql php72-redis \
-php72-yaml php72-http php72-gmagick composer
+php72-yaml php72-http php72-gmagick composer watchman
 
 brew services start homebrew/php/php72
 sudo brew services start httpd
