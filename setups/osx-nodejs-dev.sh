@@ -43,8 +43,8 @@ code --install-extension bierner.markdown-preview-github-styles # markdown previ
 
 
 # Install CLI Tools
-brew install node nvm zsh git gh awscli
-brew tap heroku/brew && brew install heroku
+brew tap heroku/brew
+brew install node nvm zsh git gh awscli pnpm heroku
 
 # Install PHP Tools
 sudo apachectl stop
