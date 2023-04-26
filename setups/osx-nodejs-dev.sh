@@ -13,48 +13,62 @@ xcode-select --install
 
 
 # Install Apps
-brew cask install hyper visual-studio-code google-chrome slack sourcetree docker
+brew install hyper visual-studio-code google-chrome slack sourcetree docker arc spotify zoom github raycast
 
 
-# Install VSCode Extenstions
-code --install-extension msjsdiag.debugger-for-chrome
-code --install-extension robertohuertasm.vscode-icons
-code --install-extension dbaeumer.vscode-eslint 
-code --install-extension zhuangtongfa.material-theme
-code --install-extension HookyQR.beautify
-code --install-extension PeterJausovec.vscode-docker
-code --install-extension Zignd.html-css-class-completion
-code --install-extension felixfbecker.php-intellisense
-code --install-extension eg2.vscode-npm-script
-code --install-extension humao.rest-client
-code --install-extension esbenp.prettier-vscode
-code --install-extension christian-kohler.npm-intellisense
+# Install VSCode Theming
+code --install-extension GitHub.github-vscode-theme # Github theme
+code --install-extension vscode-icons-team.vscode-icons
+
+# JS Developer Extensions
+code --install-extension christian-kohler.npm-intellisense # npm auto complete
+code --install-extension dbaeumer.vscode-eslint
+
+
+# Developer Tools
+code --install-extension GitHub.copilot # GitHub Copilot 
+code --install-extension GitHub.vscode-pull-request-github # Github Issues and PRs
+code --install-extension streetsidesoftware.code-spell-checker # spell checking
+code --install-extension oderwat.indent-rainbow # indent rainbows
+code --install-extension ms-azuretools.vscode-docker # docker management
+code --install-extension github.vscode-github-actions # github actions
+code --install-extension eamodio.gitlens # gitlens
+code --install-extension rangav.vscode-thunder-client # REST API Client
+
+# Lanugague & File Support
+code --install-extension golang.go # golang support
+code --install-extension mikestead.dotenv # dotenv files
+code --install-extension mechatroner.rainbow-csv #rainbow CSV files
+code --install-extension bierner.markdown-preview-github-styles # markdown previewer
 
 
 # Install CLI Tools
-brew install node nvm zsh git heroku/brew/heroku 
+brew install node nvm zsh git gh awscli
+brew tap heroku/brew && brew install heroku
 
 # Install PHP Tools
 sudo apachectl stop
 sudo launchctl unload -w /System/Library/LaunchDaemons/org.apache.httpd.plist 2>/dev/null
 
-brew tap homebrew/php
-brew tap homebrew/dupes
 
-brew install httpd
-brew install php72 --with-httpd
-brew install php72-geoip php72-maxminddb php72-memcached php72-pdo-pgsql php72-redis \
-php72-yaml php72-http php72-gmagick composer watchman
+# TODO: Add in PHP setup
+# brew tap homebrew/php
+# brew tap homebrew/dupes
 
-brew services start homebrew/php/php72
-sudo brew services start httpd
+# brew install httpd
+# brew install php72 --with-httpd
+# brew install php72-geoip php72-maxminddb php72-memcached php72-pdo-pgsql php72-redis \
+# php72-yaml php72-http php72-gmagick composer watchman
+
+# brew services start homebrew/php/php72
+# sudo brew services start httpd
 
 
 # Open Hyper to allow plugins
 open /Applications/Hyper.app
 
 # Global NPM Modules
-npm install -g eslint browserify webpack hyperlayout hpm-cli yo nodemon node-inspector
+npm install -g yarn
 
 # add hyper plugins
 hpm install hyperlayout hyperterm-working-directory
@@ -63,9 +77,9 @@ hpm install hyperlayout hyperterm-working-directory
 
 # Setup NVM
 mkdir ~/.nvm
-nvm install 5 --reinstall-packages-from=system
-nvm install 6 --reinstall-packages-from=system
-nvm install 8 --reinstall-packages-from=system
+nvm install 14 --reinstall-packages-from=system
+nvm install 16 --reinstall-packages-from=system
+nvm install 18 --reinstall-packages-from=system
 
 
 
