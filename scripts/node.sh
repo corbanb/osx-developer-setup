@@ -5,13 +5,16 @@ install_node() {
   echo "Installing NVM (Node Version Manager)..."
   brew install nvm
 
+
   # Create NVM directory
   mkdir -p ~/.nvm
+
 
   # Load NVM
   export NVM_DIR="$HOME/.nvm"
   [ -s "$(brew --prefix)/opt/nvm/nvm.sh" ] && . "$(brew --prefix)/opt/nvm/nvm.sh"
   [ -s "$(brew --prefix)/opt/nvm/etc/bash_completion.d/nvm" ] && . "$(brew --prefix)/opt/nvm/etc/bash_completion.d/nvm"
+
 
   # Get latest stable Node.js versions
   echo "Fetching latest stable Node.js versions..."
@@ -31,6 +34,7 @@ install_node() {
     fi
   done
 
+
   # Install plugins for Node.js development
   echo "Installing plugins for Node.js development..."
   if $vscode_installed; then
@@ -44,6 +48,7 @@ install_node() {
     jb_plugin install prettier
     jb_plugin install TSLint
   fi
+
 
   echo "Node.js setup complete."
 }
