@@ -47,6 +47,7 @@ usage() {
   echo "Subcommands:"
   echo "  setup        Set up tools for specified languages or start the interactive setup"
   echo "  info         Display information about a specific language"
+  echo "  dotfiles     Install dotfiles (.gitconfig, .npmrc, profile.zsh)"
   echo "  list         List all available languages"
   echo "  help         Show this help message"
   echo
@@ -54,6 +55,7 @@ usage() {
   echo "  devbot setup"
   echo "  devbot setup node ruby"
   echo "  devbot info node"
+  echo "  devbot dotfiles"
   echo "  devbot list"
   echo "  devbot help"
 }
@@ -61,7 +63,7 @@ usage() {
 download_and_source() {
   local script_name="$1"
   local script_url="https://raw.githubusercontent.com/yourusername/devbot/main/scripts/$script_name"
-  
+
   if [ -f "scripts/$script_name" ]; then
     source "scripts/$script_name"
     verbose_log "Sourced $script_name from local repository."
@@ -69,7 +71,7 @@ download_and_source() {
     local tmp_script_file
     tmp_script_file=$(mktemp)
     curl -s -o "$tmp_script_file" "$script_url" && source "$tmp_script_file"
-    rm -f "$tmp_script_file"
+    rm -f "$tmp_script_file"ls
     verbose_log "Sourced $script_name from remote repository."
   fi
 }
@@ -139,6 +141,66 @@ check_requirements() {
   fi
 }
 
+install_dotfiles() {
+  # symlink dotfiles from ./dotfiles/ to ~/ (home directory)
+  # if the file already exists, back it up to ~/dotfiles_backup/
+  # if the file is a directory, back it up to ~/dotfiles_backup/ and then delete it
+  # if the file is a symlink, delete it
+  # then symlink the file from ./dotfiles/ to ~/
+  echo "Installing dotfiles..."
+  # get current working directory
+
+  local dotfiles_dir="$PWD/dotfiles"
+  local dotfiles_backup_dir="$HOME/dotfiles_backup"
+  mkdir -p "$dotfiles_backup_dir"
+
+  for file in $(find "$dotfiles_dir" -maxdepth 1 -type f -name ".*"); do
+    local filename
+    filename=$(basename "$file")
+    if [ -f "$HOME/$filename" ]; then
+      verbose_log "Backing up $filename to $dotfiles_backup_dir"
+      mv "$HOME/$filename" "$dotfiles_backup_dir"
+    elif [ -d "$HOME/$filename" ]; then
+      verbose_log "Backing up $filename to $dotfiles_backup_dir"
+      mv "$HOME/$filename" "$dotfiles_backup_dir"
+    elif [ -L "$HOME/$filename" ]; then
+      verbose_log "Deleting existing symlink $filename"
+      rm "$HOME/$filename"
+    fi
+    verbose_log "Creating symlink for $filename"
+    ln -sf "$file" "$HOME/$filename"
+  done
+
+  echo "Dotfiles installed."
+
+  # next we need to look for .zsh files and symlink them into $HOME/.oh-my-zsh/custom/
+  # if the file already exists, back it up to ~/dotfiles_backup/
+  # if the file is a directory, back it up to ~/dotfiles_backup/ and then delete it
+  # if the file is a symlink, delete it
+  # then symlink the file from ./dotfiles/ to $HOME/.oh-my-zsh/custom/
+  echo "Installing custom ZSH files..."
+  local zsh_custom_dir="$HOME/.oh-my-zsh/custom"
+  mkdir -p "$zsh_custom_dir"
+
+  for file in $(find "$dotfiles_dir" -maxdepth 1 -type f -name "*.zsh"); do
+    local filename
+    filename=$(basename "$file")
+    if [ -f "$zsh_custom_dir/$filename" ]; then
+      verbose_log "Backing up $filename to $dotfiles_backup_dir"
+      mv "$zsh_custom_dir/$filename" "$dotfiles_backup_dir"
+    elif [ -d "$zsh_custom_dir/$filename" ]; then
+      verbose_log "Backing up $filename to $dotfiles_backup_dir"
+      mv "$zsh_custom_dir/$filename" "$dotfiles_backup_dir"
+    elif [ -L "$zsh_custom_dir/$filename" ]; then
+      verbose_log "Deleting existing symlink $filename"
+      rm "$zsh_custom_dir/$filename"
+    fi
+    verbose_log "Creating symlink for $filename"
+    ln -sf "$file" "$zsh_custom_dir/$filename"
+  done
+
+}
+
 
 # Main function
 main() {
@@ -190,6 +252,9 @@ main() {
       ;;
     list)
       list_languages
+      ;;
+    dotfiles)
+      install_dotfiles
       ;;
     *)
       echo "In order to run the and install using devbot learn more using --help"
