@@ -24,6 +24,7 @@ code --install-extension vscode-icons-team.vscode-icons
 # JS Developer Extensions
 code --install-extension christian-kohler.npm-intellisense 
 code --install-extension dbaeumer.vscode-eslint
+code --install-extension yoavbls.pretty-ts-errors
 
 # Developer Tools
 code --install-extension GitHub.copilot 
